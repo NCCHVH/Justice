@@ -1,0 +1,52 @@
+local farm = "fs"
+local function bt()
+farm = "fs"
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(362.28216552734375, 263.7469177246094, -491.6352844238281)
+end
+local function fs()
+farm = "bt"
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(411.5, 270.3968505859375, 972.5999755859375)
+end
+spawn(function()
+while task.wait() do
+if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer({"Respawn"})
+repeat wait() until game.Players.LocalPlayer.Character.Humanoid.Health ~= 0
+wait(2)
+if farm == "fs" then
+fs()
+elseif farm == "bt" then
+bt()
+end
+end
+end
+end)
+spawn(function()
+while task.wait() do
+if farm == "fs" then
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer({"Add_FS_Request"})
+if game.Players.LocalPlayer.Character:FindFirstChild("Fist Training") then
+game.Players.LocalPlayer.Character["Fist Training"]:Activate()
+end
+end
+end
+end)
+for i,ws in pairs(workspace:GetDescendants()) do
+            if ws:IsA("BasePart") then
+                ws.Material = "Plastic"
+            elseif ws:IsA("Decal") or ws:IsA("Texture") or ws:IsA("ParticleEmitter") or ws:IsA("Sparkles") or ws:IsA("Fire") or ws:IsA("Smoke") and ws.Name ~= "face" then
+                ws:Destroy()
+            end
+        end
+        for i,ws in pairs(workspace:GetChildren()) do
+            if ws:IsA("Accessory") or ws:IsA("Tool") then
+                ws:Destroy()
+            end
+        end
+        for i,ws in pairs(game.Lighting:GetDescendants()) do
+            if ws:IsA("BasePart") then
+                ws.Material = "Plastic"
+            elseif ws:IsA("Decal") or ws:IsA("Texture") or ws:IsA("ParticleEmitter") or ws:IsA("Sparkles") or ws:IsA("Fire") or ws:IsA("Smoke") then
+                ws:Destroy()
+            end
+        end
